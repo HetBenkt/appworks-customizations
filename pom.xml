@@ -16,13 +16,103 @@
         <module>ToolExportImport</module>
         <module>ToolAdministration</module>
         <module>Debugging</module>
-        <module>Legacy</module>
+        <!--<module>Legacy</module>-->
     </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <cordys.version>23.2</cordys.version>
+        <cordys.home>C:/_HDD_SYNCH/CORDYS/CORDYS_23_2</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>eibxml</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/eibxml/eibxml.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>basicutil</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/basicutil/basicutil.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>managementlib</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/managementlib/managementlib.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>esbclient</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/esbclient/esbclient.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>esbserver</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/esbserver/esbserver.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>log4jna-api</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/ext/log4jna-api-2.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>dbconnection</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/dbconnection/dbconnection.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>ruleengine</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/ruleengine/ruleengine.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>ruleengine</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/ruleengine/ruleengine.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>entityruntime</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/documentstore/documentstore.jar</systemPath>
+        </dependency>
+    </dependencies>
 </project>
