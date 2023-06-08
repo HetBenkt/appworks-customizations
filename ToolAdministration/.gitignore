@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+/Console/src/main/resources/*.properties
+/SoapLayer/src/test/resources/*.properties
+
+.mvn
+mvnw
+mvnw.cmd
