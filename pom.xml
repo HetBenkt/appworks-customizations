@@ -16,7 +16,6 @@
         <module>ToolExportImport</module>
         <module>ToolAdministration</module>
         <module>Debugging</module>
-        <module>WebContent</module>
     </modules>
 
     <properties>
