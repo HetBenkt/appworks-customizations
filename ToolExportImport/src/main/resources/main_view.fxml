@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="525.0" prefWidth="800.0"
+            style="-fx-background-color: white;" stylesheets="@root.css"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="nl.bos.controllers.MainView">
+    <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="460.0" prefHeight="50.0" prefWidth="775.0" progress="0.0"
+                 style="-fx-border-color: BLACK; -fx-border-width: 2;"/>
+    <RadioButton fx:id="actionExport" layoutX="85.0" layoutY="219.0" mnemonicParsing="false"
+                 onAction="#handleActionExport" selected="true" text="Export">
+        <toggleGroup>
+            <ToggleGroup fx:id="toggleAction"/>
+        </toggleGroup>
+        <font>
+            <Font name="Verdana" size="16.0"/>
+        </font>
+    </RadioButton>
+    <RadioButton fx:id="actionImport" layoutX="175.0" layoutY="219.0" mnemonicParsing="false"
+                 onAction="#handleActionImport" text="Import" toggleGroup="$toggleAction">
+        <font>
+            <Font name="Verdana" size="16.0"/>
+        </font>
+    </RadioButton>
+    <Label layoutX="14.0" layoutY="220.0" text="Action:">
+        <font>
+            <Font name="Verdana" size="16.0"/>
+        </font>
+    </Label>
+    <Button id="btnExit" fx:id="btnExit" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#handleExit"
+            prefHeight="39.0" prefWidth="100.0" styleClass="btnExit" text="Exit">
+        <font>
+            <Font name="Verdana" size="18.0"/>
+        </font>
+    </Button>
+    <Button id="btnStop" fx:id="btnStop" disable="true" layoutX="288.0" layoutY="262.0" mnemonicParsing="false"
+            onAction="#handleStop" prefHeight="39.0" prefWidth="100.0" styleClass="btnStop" text="Stop">
+        <font>
+            <Font name="Verdana" size="18.0"/>
+        </font>
+    </Button>
+    <CheckBox fx:id="optionDryRun" layoutX="85.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleOptionDryRun"
+              selected="true" text="Dry-run">
+        <font>
+            <Font name="Verdana" size="16.0"/>
+        </font>
+    </CheckBox>
+    <CheckBox fx:id="optionOnlyMetadata" layoutX="85.0" layoutY="324.0" mnemonicParsing="false"
+              onAction="#handleOptionOnlyMetadata" selected="true" text="Only metadata">
+        <font>
+            <Font name="Verdana" size="16.0"/>
+        </font>
+    </CheckBox>
+    <Label fx:id="lblBatchNumber" layoutX="188.0" layoutY="418.0" text="Batch #: 0 of 0">
+        <font>
+            <Font name="Verdana" size="16.0"/>
+        </font>
+    </Label>
+    <TextArea editable="false" focusTraversable="false" layoutX="14.0" layoutY="14.0" mouseTransparent="true"
+              prefHeight="158.0" prefWidth="608.0"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              wrapText="true">
+        <font>
+            <Font name="Verdana" size="14.0"/>
+        </font>
+    </TextArea>
+    <TextArea fx:id="txaMessages" editable="false" focusTraversable="false" layoutX="405.0" layoutY="183.0"
+              prefHeight="258.0" prefWidth="381.0">
+        <font>
+            <Font name="Verdana" size="12.0"/>
+        </font>
+    </TextArea>
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="636.0" layoutY="14.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@logo.png"/>
+    </ImageView>
+    <Button id="btnExecute" fx:id="btnExecute" disable="true" layoutX="288.0" layoutY="211.0" mnemonicParsing="false"
+            onAction="#handleExecute" prefHeight="39.0" prefWidth="100.0" styleClass="btnExecute" text="Execute">
+        <font>
+            <Font name="Verdana" size="18.0"/>
+        </font>
+    </Button>
+    <Button id="btnValidate" fx:id="btnValidate" disable="true" layoutX="684.0" layoutY="386.0" mnemonicParsing="false"
+            onAction="#handleValidation" prefHeight="39.0" prefWidth="100.0" styleClass="btnValidate" text="Validate">
+        <font>
+            <Font name="Verdana" size="14.0"/>
+        </font>
+    </Button>
+</AnchorPane>

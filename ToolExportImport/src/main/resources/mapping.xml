@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="mapping.xsd">
+	<entity>
+		<name>category</name>
+		<can_have_content>true</can_have_content>
+		<properties>
+			<property>
+				<from>cat_name</from>
+				<to>cat_name</to>
+			</property>
+			<property>
+				<from>cat_description</from>
+				<to>cat_description</to>
+			</property>
+		</properties>
+	</entity>
+	<entity>
+		<name>order</name>
+		<can_have_content>false</can_have_content>
+		<properties>
+			<property>
+				<from>order_name</from>
+				<to>order_name</to>
+			</property>
+			<property>
+				<from>order_quantity</from>
+				<to>order_quantity</to>
+			</property>
+		</properties>
+	</entity>
+</mapping>

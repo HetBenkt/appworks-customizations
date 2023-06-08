@@ -1,0 +1,39 @@
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.button {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
+.btnExit {
+    -fx-background-color: dodgerblue;
+}
+
+.btnExit:pressed {
+    -fx-background-color: lightgrey;
+}
+
+.btnExecute {
+    -fx-background-color: limegreen;
+}
+
+.btnExecute:pressed {
+    -fx-background-color: lightgrey;
+}
+
+.btnStop {
+    -fx-background-color: orangered;
+}
+
+.btnStop:pressed {
+    -fx-background-color: lightgrey;
+}
