@@ -1,8 +1,11 @@
 package nl.bos;
 
 import com.eibus.soap.*;
+import com.eibus.util.logger.CordysLogger;
 
 public class CustomConnector extends ApplicationConnector {
+    private static CordysLogger log = CordysLogger.getCordysLogger(CustomConnector.class);
+
     //This is invoked by the service container after establishing the connection to the AppWorks Platform ESB.
     @Override
     public void open(Processor processor) {
@@ -24,6 +27,6 @@ public class CustomConnector extends ApplicationConnector {
     //This is invoked by the service container to indicate the arrival of a new message and creation of a SOAPTransaction for it.
     @Override
     public ApplicationTransaction createTransaction(SOAPTransaction soapTransaction) {
-        return super.createTransaction(soapTransaction);
+        return new CustomTransaction();
     }
 }
