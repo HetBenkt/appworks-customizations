@@ -28,7 +28,7 @@ public class CustomTransaction implements ApplicationTransaction {
 
     }
 
-    //This method returnsTrue, if the XML mapper can process Web service operations defined of the specified type such as SQL, Java, LDAP and so on.
+    //This method returns true, if the XML mapper can process Web service operations defined of the specified type such as SQL, Java, LDAP and so on.
     @Override
     public boolean canProcess(String typeValue) {
         return typeValue.equalsIgnoreCase(TYPE_VALUE);

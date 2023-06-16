@@ -1,5 +1,6 @@
 package nl.bos;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,12 @@ class MqttServiceTest {
                 EConfiguration.INSTANCE.getValue("host"),
                 Integer.parseInt(EConfiguration.INSTANCE.getValue("port"))
         );
+        connect();
+    }
+
+    @AfterEach
+    void breakdown() {
+        disconnect();
     }
 
     @Test
@@ -26,10 +33,42 @@ class MqttServiceTest {
     }
 
     @Test
+    void disconnect() {
+        assertThat(mqttService.disconnect()).isTrue();
+    }
+
+    @Test
+    void subscribe() {
+        assertThat(mqttService.subscribe(
+                "my/test/topic")
+        ).isTrue();
+        send();
+    }
+
+    @Test
     void send() {
         assertThat(mqttService.send(
                 "my/test/topic",
-                "Hello world...")
+                "Hello world...",
+                false)
+        ).isTrue();
+    }
+
+    @Test
+    void sendRetained() {
+        assertThat(mqttService.send(
+                "my/test/topic",
+                "Hello world...RETAIN",
+                true)
+        ).isTrue();
+    }
+
+    @Test
+    void deleteRetained() {
+        assertThat(mqttService.send(
+                "my/test/topic",
+                "",
+                true)
         ).isTrue();
     }
 }
