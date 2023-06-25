@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MqttServiceTest {
 
+    private static final String TOPIC = "my/test/topic";
     private MqttService mqttService;
 
     @BeforeEach
@@ -16,39 +17,29 @@ class MqttServiceTest {
                 EConfiguration.INSTANCE.getValue("host"),
                 Integer.parseInt(EConfiguration.INSTANCE.getValue("port"))
         );
-        connect();
-    }
 
-    @AfterEach
-    void breakdown() {
-        disconnect();
-    }
-
-    @Test
-    void connect() {
         assertThat(mqttService.connect(
                 EConfiguration.INSTANCE.getValue("username"),
                 EConfiguration.INSTANCE.getValue("password"))
         ).isTrue();
     }
 
-    @Test
-    void disconnect() {
+    @AfterEach
+    void tearDown() {
         assertThat(mqttService.disconnect()).isTrue();
     }
 
     @Test
     void subscribe() {
         assertThat(mqttService.subscribe(
-                "my/test/topic")
+                TOPIC)
         ).isTrue();
-        send();
     }
 
     @Test
-    void send() {
-        assertThat(mqttService.send(
-                "my/test/topic",
+    void publish() {
+        assertThat(mqttService.publish(
+                TOPIC,
                 "Hello world...",
                 false)
         ).isTrue();
@@ -56,8 +47,8 @@ class MqttServiceTest {
 
     @Test
     void sendRetained() {
-        assertThat(mqttService.send(
-                "my/test/topic",
+        assertThat(mqttService.publish(
+                TOPIC,
                 "Hello world...RETAIN",
                 true)
         ).isTrue();
@@ -65,8 +56,8 @@ class MqttServiceTest {
 
     @Test
     void deleteRetained() {
-        assertThat(mqttService.send(
-                "my/test/topic",
+        assertThat(mqttService.publish(
+                TOPIC,
                 "",
                 true)
         ).isTrue();

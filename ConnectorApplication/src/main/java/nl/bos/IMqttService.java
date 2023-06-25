@@ -6,7 +6,7 @@ public interface IMqttService {
 
     boolean disconnect();
 
-    boolean send(String topic, String payload, boolean retain);
+    boolean publish(String topic, String payload, boolean retain);
 
     boolean subscribe(String topic);
 }

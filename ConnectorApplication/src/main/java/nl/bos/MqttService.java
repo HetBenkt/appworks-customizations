@@ -39,7 +39,7 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public boolean send(String topic, String payload, boolean retain) {
+    public boolean publish(String topic, String payload, boolean retain) {
         client.publishWith()
                 .topic(topic)
                 .retain(retain)
