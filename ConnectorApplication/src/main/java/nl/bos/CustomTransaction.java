@@ -7,13 +7,17 @@ import com.eibus.xml.nom.Node;
 public class CustomTransaction implements ApplicationTransaction {
 
     private static final String TYPE_VALUE = "Custom App Connector"; //Must match the type-value in the 'implementation' XML!
-    private static final String METHOD_NAME = "send"; //Must match the service operation name!
+    private static final String METHOD_NAME_SUBSCRIBE = "subscribe"; //Must match the service operation name!
+    private static final String METHOD_NAME_PUBLISH = "publish"; //Must match the service operation name!
     private static CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
+    private final IMqttService service;
 
-    public CustomTransaction() {
+
+    public CustomTransaction(IMqttService service) {
         if (log.isDebugEnabled()) {
             log.debug("Transaction created.");
         }
+        this.service = service;
     }
 
     //This is invoked by the SOAPTransaction, when the entire SOAPTransaction succeeds and can be committed.
@@ -37,8 +41,16 @@ public class CustomTransaction implements ApplicationTransaction {
     //This is invoked to process the relevant body blocks within this transaction.
     @Override
     public boolean process(BodyBlock request, BodyBlock response) {
-        if(Node.getLocalName(request.getXMLNode()).equalsIgnoreCase(METHOD_NAME)) {
-            //todo this is where the magic will happen...
+        if(log.isDebugEnabled()) {
+            log.debug(Node.writeToString(request.getMethodDefinition().getImplementation(), true));
+        }
+
+        if(Node.getLocalName(request.getXMLNode()).equalsIgnoreCase(METHOD_NAME_SUBSCRIBE)) {
+            service.subscribe(""); //TODO input will be passed into the subscribe service request
+            return true;
+        } else if (Node.getLocalName(request.getXMLNode()).equalsIgnoreCase(METHOD_NAME_PUBLISH)) {
+            service.publish("", "", false); //TODO input will be passed into the subscribe service request
+            //TODO the response of the publish will be send back into the response!?!? I guess?
             return true;
         }
         return false;
