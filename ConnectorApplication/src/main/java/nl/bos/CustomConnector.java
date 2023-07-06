@@ -38,7 +38,7 @@ public class CustomConnector extends ApplicationConnector {
     @Override
     public ApplicationTransaction createTransaction(SOAPTransaction soapTransaction) {
         if(log.isDebugEnabled()) {
-            Node.writeToString(Node.getElement(soapTransaction.getRequestEnvelope(), "SOAP:Body"), true);
+            log.debug(Node.writeToString(Node.getElement(soapTransaction.getRequestEnvelope(), "SOAP:Body"), true));
         }
         return new CustomTransaction(service);
     }
