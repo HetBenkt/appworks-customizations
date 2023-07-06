@@ -1,15 +1,13 @@
 package nl.bos;
 
+import com.eibus.util.logger.CordysLogger;
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class MqttService implements IMqttService {
-    Logger logger = Logger.getLogger(MqttService.class.getName());
+    private static CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
     private final Mqtt5BlockingClient client;
 
     public MqttService(String host, int port) {
@@ -55,8 +53,9 @@ public class MqttService implements IMqttService {
                 .topicFilter(topic)
                 .callback(publish -> {
                     String payload = new String(publish.getPayloadAsBytes(), UTF_8);
-                    logger.log(Level.ALL, payload);
-                    System.out.println(payload);
+                    if(log.isDebugEnabled()) {
+                        log.debug(payload);
+                    }
                 })
                 .send();
         return true;

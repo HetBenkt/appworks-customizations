@@ -3,6 +3,9 @@ package nl.bos;
 import com.eibus.soap.*;
 import com.eibus.util.logger.CordysLogger;
 import com.eibus.xml.nom.Node;
+import nl.bos.command.ICommand;
+import nl.bos.command.CommandPublish;
+import nl.bos.command.CommandSubscribe;
 
 public class CustomTransaction implements ApplicationTransaction {
 
@@ -45,14 +48,23 @@ public class CustomTransaction implements ApplicationTransaction {
             log.debug(Node.writeToString(request.getMethodDefinition().getImplementation(), true));
         }
 
-        if(Node.getLocalName(request.getXMLNode()).equalsIgnoreCase(METHOD_NAME_SUBSCRIBE)) {
-            service.subscribe(""); //TODO input will be passed into the subscribe service request
-            return true;
-        } else if (Node.getLocalName(request.getXMLNode()).equalsIgnoreCase(METHOD_NAME_PUBLISH)) {
-            service.publish("", "", false); //TODO input will be passed into the subscribe service request
-            //TODO the response of the publish will be send back into the response!?!? I guess?
-            return true;
+
+        switch(Node.getLocalName(request.getXMLNode())) {
+            case METHOD_NAME_SUBSCRIBE -> {
+                String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
+                ICommand subscribe = new CommandSubscribe(service, topic);
+                return subscribe.apply(); //TODO A response on the subscription will happen a publication; And we want to see it!?!? I guess?
+            }
+            case METHOD_NAME_PUBLISH -> {
+                String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
+                String payload = Node.getData(Node.getElement(request.getXMLNode(), "payload"));
+                boolean retain = Boolean.parseBoolean(Node.getData(Node.getElement(request.getXMLNode(), "retain")));
+                ICommand publish = new CommandPublish(service, topic, payload, retain);
+                return publish.apply();
+            }
+            default -> {
+                return false;
+            }
         }
-        return false;
     }
 }
