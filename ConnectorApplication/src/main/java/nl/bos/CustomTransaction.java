@@ -12,7 +12,7 @@ public class CustomTransaction implements ApplicationTransaction {
     private static final String TYPE_VALUE = "Custom App Connector"; //Must match the type-value in the 'implementation' XML!
     private static final String METHOD_NAME_SUBSCRIBE = "subscribe"; //Must match the service operation name!
     private static final String METHOD_NAME_PUBLISH = "publish"; //Must match the service operation name!
-    private static CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
+    private static final CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
     private final IMqttService service;
 
 
@@ -53,7 +53,9 @@ public class CustomTransaction implements ApplicationTransaction {
             case METHOD_NAME_SUBSCRIBE -> {
                 String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
                 ICommand subscribe = new CommandSubscribe(service, topic);
-                return subscribe.apply(); //TODO A response on the subscription will happen a publication; And we want to see it!?!? I guess?
+                return subscribe.apply();
+                //TODO A response on the subscription will happen after a publication; And we want to see it!?!? I guess?
+                //TODO We can do this by adding data in the response object! See Node.setData(response, ...) and Node.add(response, ...)!
             }
             case METHOD_NAME_PUBLISH -> {
                 String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));

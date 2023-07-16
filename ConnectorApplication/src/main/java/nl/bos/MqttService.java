@@ -7,7 +7,7 @@ import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class MqttService implements IMqttService {
-    private static CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
+    private static final CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
     private final Mqtt5BlockingClient client;
 
     public MqttService(String host, int port) {
@@ -20,12 +20,13 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public boolean connect(String username, String password) {
+    public boolean connect(String username, String password, int keepAlive) {
         client.connectWith()
                 .simpleAuth()
                 .username(username)
                 .password(UTF_8.encode(password))
                 .applySimpleAuth()
+                .keepAlive(keepAlive)
                 .send();
         return true;
     }
@@ -33,6 +34,15 @@ public class MqttService implements IMqttService {
     @Override
     public boolean disconnect() {
         client.disconnect();
+        return true;
+    }
+
+    @Override
+    public boolean ping() {
+        client.publishWith()
+                .topic("PINGREQ")
+                .retain(false)
+                .send();
         return true;
     }
 
