@@ -46,6 +46,13 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>ftpconn</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/ftpconn/ftpconn.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>eibxml</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>

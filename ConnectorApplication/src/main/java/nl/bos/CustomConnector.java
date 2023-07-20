@@ -1,8 +1,10 @@
 package nl.bos;
 
+import com.cordys.security.encryption.Password;
 import com.eibus.soap.*;
 import com.eibus.util.logger.CordysLogger;
 import com.eibus.xml.nom.Node;
+import com.eibus.xml.xpath.XPath;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,28 +15,30 @@ public class CustomConnector extends ApplicationConnector {
     IMqttService mqttService;
     ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
 
-    public CustomConnector() {
-        log.info("In constructor");
-
-        //TODO Input should be received from the service container configuration part
-        String host = "";
-        int port = 0;
-
-        mqttService = new MqttService(host, port);
-    }
-
     //This is invoked by the service container after establishing the connection to the AppWorks Platform ESB.
     @Override
     public void open(Processor processor) {
         log.info("Open connection");
 
-        //TODO Input should be received from the service container configuration part
-        int keepAlive = Integer.MAX_VALUE;
-        String username = "";
-        String password = "";
+        CustomConnectorConfiguration customConnectorConfig = processor.getApplicationConnectorConfiguration(CustomConnectorConfiguration.class);
+        int configurationsNode = processor.getProcessorConfigurationNode();
+        int configurationNode = XPath.getXPathInstance("./configuration").firstMatch(configurationsNode, null);
+        if(log.isDebugEnabled()) {
+            log.debug("SOAP Processor configuration node: " + Node.writeToString(configurationNode, true));
+        }
+        customConnectorConfig.setConfigurationNode(configurationNode);
 
-        mqttService.connect(username, password, keepAlive);
+        int keepAlive = customConnectorConfig.getKeepAlive();
+        String username = customConnectorConfig.getUserName();
+        Password password = customConnectorConfig.getPassword();
+        String host = customConnectorConfig.getHost();
+        int port = customConnectorConfig.getPort();
+
+        mqttService = new MqttService(host, port);
+
+        mqttService.connect(username, String.valueOf(password.getValue()), keepAlive);
         exec.scheduleAtFixedRate(new MqttRunnable(mqttService), 0, (keepAlive * 1_000L) / 2, TimeUnit.MILLISECONDS);
+
         super.open(processor);
     }
 
@@ -42,8 +46,10 @@ public class CustomConnector extends ApplicationConnector {
     @Override
     public void close(Processor processor) {
         log.info("Close connection");
+
         mqttService.disconnect();
         exec.shutdown();
+
         super.close(processor);
     }
 
@@ -61,5 +67,4 @@ public class CustomConnector extends ApplicationConnector {
         }
         return new CustomTransaction(mqttService);
     }
-
 }
