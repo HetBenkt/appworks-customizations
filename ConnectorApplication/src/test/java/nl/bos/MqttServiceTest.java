@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -56,6 +57,13 @@ class MqttServiceTest {
     @Test
     void subscribe() {
         assertThat(mqttService.subscribe(
+                TOPIC)
+        ).isTrue();
+    }
+
+    @Test
+    void unsubscribe() throws ExecutionException, InterruptedException {
+        assertThat(mqttService.unsubscribe(
                 TOPIC)
         ).isTrue();
     }
