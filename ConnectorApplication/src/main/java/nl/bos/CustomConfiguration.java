@@ -42,9 +42,9 @@ public class CustomConfiguration extends SettingComponentBase {
         return getSetting(null, () -> Integer.valueOf(getLdapProperty("ftpProxyPort", "0")));
     }
 
-    @SettingDefinition(name = "keepAlive", defaultValue = "0")
-    public int getKeepAlive() {
-        return Integer.MAX_VALUE; //TODO Should be in the config, but we have no field (yet!)
+    @SettingDefinition(name = "keepAlive", defaultValue = "0") //Keep alive must not exceed the value range of unsigned short [0, 65535]
+    public short getKeepAlive() {
+        return Short.MAX_VALUE; //TODO Should be in the config, but we have no field (yet!)
     }
 
     private String getLdapProperty(String propName, String defaultValue) {
