@@ -15,6 +15,8 @@ public class MqttService implements IMqttService {
     private static final CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
     private final Mqtt5BlockingClient client;
 
+    private String payload = "";
+
     public MqttService(String host, int port) {
         client = MqttClient.builder()
                 .useMqttVersion5()
@@ -82,7 +84,7 @@ public class MqttService implements IMqttService {
                     .subscribeWith()
                     .topicFilter(topic)
                     .callback(publish -> {
-                        String payload = new String(publish.getPayloadAsBytes(), UTF_8);
+                        payload = new String(publish.getPayloadAsBytes(), UTF_8);
                         if (log.isDebugEnabled()) {
                             log.debug(payload);
                         }
@@ -90,6 +92,16 @@ public class MqttService implements IMqttService {
                     .send();
             return true;
         }
+    }
+
+    @Override
+    public String getPayload() {
+        return payload;
+    }
+
+    @Override
+    public void resetPayload() {
+        this.payload = "";
     }
 
     @Override

@@ -48,21 +48,24 @@ public class CustomTransaction implements ApplicationTransaction {
             log.debug(Node.writeToString(request.getMethodDefinition().getImplementation(), true));
         }
 
-
         switch(Node.getLocalName(request.getXMLNode())) {
             case METHOD_NAME_SUBSCRIBE -> {
                 String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
                 ICommand subscribe = new CommandSubscribe(service, topic);
                 return subscribe.apply();
-                //TODO A response on the subscription will happen after a publication; And we want to see it!?!? I guess?
-                //TODO We can do this by adding data in the response object! See Node.setData(response, ...) and Node.add(response, ...)!
             }
             case METHOD_NAME_PUBLISH -> {
                 String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
                 String payload = Node.getData(Node.getElement(request.getXMLNode(), "payload"));
                 boolean retain = Boolean.parseBoolean(Node.getData(Node.getElement(request.getXMLNode(), "retain")));
                 ICommand publish = new CommandPublish(service, topic, payload, retain);
-                return publish.apply();
+                boolean result = publish.apply();
+
+                //TODO Try to set response after publish, but response is still empty in AppWorks!? See solution in NodeTest (for next time)! :)
+                Node.setData(Node.getFirstDataNode((response.getXMLNode())), service.getPayload());
+                service.resetPayload();
+
+                return result;
             }
             default -> {
                 return false;
