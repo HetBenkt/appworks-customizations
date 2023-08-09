@@ -13,10 +13,13 @@ public class CustomTransaction implements ApplicationTransaction {
     private static final String METHOD_NAME_SUBSCRIBE = "subscribe"; //Must match the service operation name!
     private static final String METHOD_NAME_PUBLISH = "publish"; //Must match the service operation name!
     private static final CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
+    public static final String TOPIC = "topic";
+    public static final String PAYLOAD = "payload";
+    public static final String RETAIN = "retain";
     private final IMqttService service;
 
 
-    public CustomTransaction(IMqttService service) {
+    public CustomTransaction(final IMqttService service) {
         if (log.isDebugEnabled()) {
             log.debug("Transaction created.");
         }
@@ -26,13 +29,13 @@ public class CustomTransaction implements ApplicationTransaction {
     //This is invoked by the SOAPTransaction, when the entire SOAPTransaction succeeds and can be committed.
     @Override
     public void commit() {
-
+        //TODO Requires implementation
     }
 
     //This is invoked by the SOAPTransaction, when one of the ApplicationTransactions has returned false during the process() method.
     @Override
     public void abort() {
-
+        //TODO Requires implementation
     }
 
     //This method returns true, if the XML mapper can process Web service operations defined of the specified type such as SQL, Java, LDAP and so on.
@@ -50,19 +53,18 @@ public class CustomTransaction implements ApplicationTransaction {
 
         switch(Node.getLocalName(request.getXMLNode())) {
             case METHOD_NAME_SUBSCRIBE -> {
-                String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
+                String topic = Node.getData(Node.getElement(request.getXMLNode(), TOPIC));
                 ICommand subscribe = new CommandSubscribe(service, topic);
                 return subscribe.apply();
             }
             case METHOD_NAME_PUBLISH -> {
-                String topic = Node.getData(Node.getElement(request.getXMLNode(), "topic"));
-                String payload = Node.getData(Node.getElement(request.getXMLNode(), "payload"));
-                boolean retain = Boolean.parseBoolean(Node.getData(Node.getElement(request.getXMLNode(), "retain")));
+                String topic = Node.getData(Node.getElement(request.getXMLNode(), TOPIC));
+                String payload = Node.getData(Node.getElement(request.getXMLNode(), PAYLOAD));
+                boolean retain = Boolean.parseBoolean(Node.getData(Node.getElement(request.getXMLNode(), RETAIN)));
                 ICommand publish = new CommandPublish(service, topic, payload, retain);
                 boolean result = publish.apply();
 
-                //TODO Try to set response after publish, but response is still empty in AppWorks!? See solution in NodeTest (for next time)! :)
-                Node.setData(Node.getFirstDataNode((response.getXMLNode())), service.getPayload());
+                Node.setDataElement(response.getXMLNode(), PAYLOAD, service.getPayload());
                 service.resetPayload();
 
                 return result;

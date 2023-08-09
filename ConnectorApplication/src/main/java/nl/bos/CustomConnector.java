@@ -12,13 +12,15 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomConnector extends ApplicationConnector {
     private static final CordysLogger log = CordysLogger.getCordysLogger(CustomConnector.class);
-    IMqttService mqttService;
-    ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+    private IMqttService mqttService;
+    private final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
 
     //This is invoked by the service container after establishing the connection to the AppWorks Platform ESB.
     @Override
     public void open(Processor processor) {
-        log.info("Open connection");
+        if(log.isDebugEnabled()) {
+            log.debug("Open connection");
+        }
 
         CustomConnectorConfiguration customConnectorConfig = processor.getApplicationConnectorConfiguration(CustomConnectorConfiguration.class);
         int configurationsNode = processor.getProcessorConfigurationNode();
@@ -36,27 +38,23 @@ public class CustomConnector extends ApplicationConnector {
 
         mqttService = new MqttService(host, port);
 
-        mqttService.connect(username, String.valueOf(password.getValue()), keepAlive);
-        exec.scheduleAtFixedRate(new MqttRunnable(mqttService), 0, (keepAlive * 1_000L) / 2, TimeUnit.MILLISECONDS);
-
-        super.open(processor);
+        if(mqttService.connect(username, String.valueOf(password.getValue()), keepAlive)) {
+            exec.scheduleAtFixedRate(new MqttRunnable(mqttService), 0, (keepAlive * 1_000L) / 2, TimeUnit.MILLISECONDS);
+            super.open(processor);
+        }
     }
 
     //This is invoked by the service container after closing the connection to the AppWorks Platform ESB.
     @Override
     public void close(Processor processor) {
-        log.info("Close connection");
+        if(log.isDebugEnabled()) {
+            log.debug("Close connection");
+        }
 
         mqttService.disconnect();
         exec.shutdown();
 
         super.close(processor);
-    }
-
-    //This is invoked by the service container to clear the cache.
-    @Override
-    public void reset(Processor processor) {
-        super.reset(processor);
     }
 
     //This is invoked by the service container to indicate the arrival of a new message and creation of a SOAPTransaction for it.

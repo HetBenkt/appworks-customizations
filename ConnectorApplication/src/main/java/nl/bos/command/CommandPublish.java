@@ -19,7 +19,7 @@ public class CommandPublish extends ACommand implements ICommand {
     private final String payload;
     private final boolean retain;
 
-    public CommandPublish(IMqttService service, String topic, String payload, boolean retain) {
+    public CommandPublish(final IMqttService service, final String topic, final String payload, final boolean retain) {
         super(service, topic);
         this.payload = payload;
         this.retain = retain;

@@ -14,7 +14,7 @@ import nl.bos.IMqttService;
  */
 public class CommandSubscribe extends ACommand implements ICommand {
 
-    public CommandSubscribe(IMqttService service, String topic) {
+    public CommandSubscribe(final IMqttService service, final String topic) {
         super(service, topic);
     }
 

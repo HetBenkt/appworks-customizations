@@ -4,6 +4,7 @@ import com.eibus.util.logger.CordysLogger;
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
 import com.hivemq.client.mqtt.mqtt5.message.Mqtt5MessageType;
+import com.hivemq.client.mqtt.mqtt5.message.connect.connack.Mqtt5ConnAck;
 import com.hivemq.client.mqtt.mqtt5.message.unsubscribe.unsuback.Mqtt5UnsubAck;
 
 import java.util.concurrent.CompletableFuture;
@@ -13,11 +14,12 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class MqttService implements IMqttService {
     private static final CordysLogger log = CordysLogger.getCordysLogger(CustomTransaction.class);
+    public static final String PING_REQUEST = "PINGREQ";
     private final Mqtt5BlockingClient client;
 
     private String payload = "";
 
-    public MqttService(String host, int port) {
+    public MqttService(final String host, final int port) {
         client = MqttClient.builder()
                 .useMqttVersion5()
                 .serverHost(host)
@@ -27,15 +29,15 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public boolean connect(String username, String password, int keepAlive) {
-        client.connectWith()
+    public boolean connect(final String username, final String password, final int keepAlive) {
+        Mqtt5ConnAck response = client.connectWith()
                 .simpleAuth()
                 .username(username)
                 .password(UTF_8.encode(password))
                 .applySimpleAuth()
                 .keepAlive(keepAlive)
                 .send();
-        return true;
+        return response.isSessionPresent();
     }
 
     @Override
@@ -54,7 +56,7 @@ public class MqttService implements IMqttService {
             return false;
         } else {
             client.publishWith()
-                    .topic("PINGREQ")
+                    .topic(PING_REQUEST)
                     .retain(false)
                     .send();
             return true;
@@ -62,7 +64,7 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public boolean publish(String topic, String payload, boolean retain) {
+    public boolean publish(final String topic, final String payload, final boolean retain) {
         if(!client.getState().isConnected()) {
             return false;
         } else {
@@ -76,7 +78,7 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public boolean subscribe(String topic) {
+    public boolean subscribe(final String topic) {
         if(!client.getState().isConnected()) {
             return false;
         } else {
@@ -105,7 +107,7 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public boolean unsubscribe(String topic) throws ExecutionException, InterruptedException {
+    public boolean unsubscribe(final String topic) throws ExecutionException, InterruptedException {
         if(!client.getState().isConnected()) {
             return false;
         } else {

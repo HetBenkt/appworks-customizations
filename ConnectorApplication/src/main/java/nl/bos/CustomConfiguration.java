@@ -14,7 +14,7 @@ import com.opentext.platform.configuration.api.SettingDefinition;
 public class CustomConfiguration extends SettingComponentBase {
     private int configurationNode;
 
-    public CustomConfiguration(Component parent) {
+    public CustomConfiguration(final Component parent) {
         super(parent);
     }
 
@@ -28,7 +28,7 @@ public class CustomConfiguration extends SettingComponentBase {
         return getSetting(null, () -> makePassword(getLdapProperty("ftpProxyPassword", "")));
     }
 
-    private Password makePassword(String password) {
+    private Password makePassword(final String password) {
         return Util.isStringEmpty(password) ? null : Password.fromBase64(password);
     }
 
@@ -47,12 +47,12 @@ public class CustomConfiguration extends SettingComponentBase {
         return Short.MAX_VALUE; //TODO Should be in the config, but we have no field (yet!)
     }
 
-    private String getLdapProperty(String propName, String defaultValue) {
+    private String getLdapProperty(final String propName, final String defaultValue) {
         int propNode = XPath.getFirstMatch(propName, null, configurationNode);
         return Node.getDataWithDefault(propNode, defaultValue);
     }
 
-    public void setConfigurationNode(int configurationNode) {
+    public void setConfigurationNode(final int configurationNode) {
         this.configurationNode = configurationNode;
     }
 }

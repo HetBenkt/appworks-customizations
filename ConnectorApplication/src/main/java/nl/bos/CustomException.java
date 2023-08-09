@@ -1,7 +1,8 @@
 package nl.bos;
 
 public class CustomException extends RuntimeException {
-    public CustomException(String message, Exception exception) {
-        super(message, exception);
+
+    public CustomException(final String message) {
+        super(message);
     }
 }
