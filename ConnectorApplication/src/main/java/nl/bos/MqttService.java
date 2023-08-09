@@ -18,6 +18,7 @@ public class MqttService implements IMqttService {
     private final Mqtt5BlockingClient client;
 
     private String payload = "";
+    private boolean callBackDone = false;
 
     public MqttService(final String host, final int port) {
         client = MqttClient.builder()
@@ -87,6 +88,7 @@ public class MqttService implements IMqttService {
                     .topicFilter(topic)
                     .callback(publish -> {
                         payload = new String(publish.getPayloadAsBytes(), UTF_8);
+                        callBackDone = true;
                         if (log.isDebugEnabled()) {
                             log.debug(payload);
                         }
@@ -102,8 +104,14 @@ public class MqttService implements IMqttService {
     }
 
     @Override
-    public void resetPayload() {
+    public boolean getCallBackDone() {
+        return callBackDone;
+    }
+
+    @Override
+    public void resetCallBack() {
         this.payload = "";
+        callBackDone = false;
     }
 
     @Override

@@ -16,7 +16,9 @@ public interface IMqttService {
 
     String getPayload();
 
-    void resetPayload();
+    boolean getCallBackDone();
+
+    void resetCallBack();
 
     boolean unsubscribe(String topic) throws ExecutionException, InterruptedException;
 }

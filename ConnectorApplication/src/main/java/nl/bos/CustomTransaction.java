@@ -1,11 +1,12 @@
 package nl.bos;
 
-import com.eibus.soap.*;
+import com.eibus.soap.ApplicationTransaction;
+import com.eibus.soap.BodyBlock;
 import com.eibus.util.logger.CordysLogger;
 import com.eibus.xml.nom.Node;
-import nl.bos.command.ICommand;
 import nl.bos.command.CommandPublish;
 import nl.bos.command.CommandSubscribe;
+import nl.bos.command.ICommand;
 
 public class CustomTransaction implements ApplicationTransaction {
 
@@ -64,8 +65,17 @@ public class CustomTransaction implements ApplicationTransaction {
                 ICommand publish = new CommandPublish(service, topic, payload, retain);
                 boolean result = publish.apply();
 
-                Node.setDataElement(response.getXMLNode(), PAYLOAD, service.getPayload());
-                service.resetPayload();
+                //Wait for callback; max. 30 sec.
+                int index = 0;
+                while(index < 10) {
+                    if (service.getCallBackDone()) {
+                        Node.setDataElement(response.getXMLNode(), PAYLOAD, service.getPayload());
+                        service.resetCallBack();
+                        break;
+                    }
+                    index++;
+                    pause(3);
+                }
 
                 return result;
             }
@@ -73,5 +83,13 @@ public class CustomTransaction implements ApplicationTransaction {
                 return false;
             }
         }
+    }
+
+    public static void pause(long seconds) {
+        long timestamp = System.currentTimeMillis();
+
+        do {
+            //Just sit and wait...
+        } while (System.currentTimeMillis() < timestamp + (seconds * 1_000));
     }
 }
