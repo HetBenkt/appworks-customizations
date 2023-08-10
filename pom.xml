@@ -16,6 +16,7 @@
         <module>ToolExportImport</module>
         <module>ToolAdministration</module>
         <module>Debugging</module>
+        <module>PdfGenerator</module>
         <!--<module>Legacy</module>-->
     </modules>
 
