@@ -17,14 +17,15 @@
         <module>ToolAdministration</module>
         <module>Debugging</module>
         <module>PdfGenerator</module>
+        <module>XQY_API</module>
         <!--<module>Legacy</module>-->
     </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <cordys.version>23.2</cordys.version>
-        <cordys.home>C:/_HDD_SYNCH/CORDYS/CORDYS_23_2</cordys.home>
+        <cordys.version>23.3</cordys.version>
+        <cordys.home>C:/_HDD_SYNCH/CORDYS/CORDYS_23_3</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -121,6 +122,13 @@
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/documentstore/documentstore.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>acllib</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/acllib/acllib.jar</systemPath>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
