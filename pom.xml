@@ -18,6 +18,7 @@
         <module>Debugging</module>
         <module>PdfGenerator</module>
         <module>XQY_API</module>
+        <module>InterestingClasses</module>
         <!--<module>Legacy</module>-->
     </modules>
 
@@ -129,6 +130,20 @@
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/acllib/acllib.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>bpmengine</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/bpmengine/bpmengine.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>notification</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/notification/notification.jar</systemPath>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
