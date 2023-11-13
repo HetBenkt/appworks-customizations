@@ -19,6 +19,7 @@
         <module>PdfGenerator</module>
         <module>XQY_API</module>
         <module>InterestingClasses</module>
+        <module>SeleniumTesting</module>
         <!--<module>Legacy</module>-->
     </modules>
 
