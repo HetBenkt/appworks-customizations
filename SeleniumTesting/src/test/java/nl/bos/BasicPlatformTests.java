@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,7 +23,6 @@ import java.time.Duration;
 class BasicPlatformTests {
 
     private static WebDriver driver;
-    private static final int THREAD_SLEEP_SECONDS = 2; //So you see something happening during development! :)
     private static final int WAIT_SECONDS = 30;
     private static PropertiesReader propertiesReader;
     private static ExtentReports extent;
@@ -41,8 +42,15 @@ class BasicPlatformTests {
 
     @BeforeEach
     void initDriver() {
-        driver = new ChromeDriver(); //Because we close it after the test!
-        driver.get(propertiesReader.getPropertyValue("otds.login_url"));
+        ChromeOptions options = new ChromeOptions();
+        if(propertiesReader.getBooleanPropertyValue("option.headless")) {
+            options.addArguments("--log-level=3", "--headless", "--disable-extensions", "--incognito");
+        } else {
+            options.addArguments("--disable-extensions", "--incognito");
+        }
+        ChromeDriverService service = ChromeDriverService.createDefaultService();
+        driver = new ChromeDriver(service, options); //Because we close it after the test!
+        driver.get(propertiesReader.getStringPropertyValue("otds.login_url"));
     }
 
     @Test
@@ -55,7 +63,7 @@ class BasicPlatformTests {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_SECONDS));
             otdsUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("otds_username")));
             test.info("Login screen found");
-            Thread.sleep(Duration.ofSeconds(THREAD_SLEEP_SECONDS).toMillis());
+            Thread.sleep(Duration.ofSeconds(propertiesReader.getIntPropertyValue("option.thread_sleep")).toMillis());
             test.pass("Test is passed!");
         } catch (Exception e) {
             test.fail("Login screen not found!");
@@ -72,7 +80,7 @@ class BasicPlatformTests {
         test.info("Start waiting for UI loading");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_SECONDS));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[aria-label='Create a new item']"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(propertiesReader.getPropertyValue("solution.creatable_option")))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(propertiesReader.getStringPropertyValue("solution.creatable_option")))).click();
         test.info("Presence of creation dialog");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ai-dialog.au-target.awlc-save-boundary.dialog-CreateItem")));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[aria-label='Cancel']"))).click(); //By.xpath("//button[text()='Cancel']")
@@ -98,7 +106,7 @@ class BasicPlatformTests {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[cmd='logout']"))).click();
         WebElement otdsUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("otds_username")));
 
-        Thread.sleep(Duration.ofSeconds(THREAD_SLEEP_SECONDS).toMillis());
+        Thread.sleep(Duration.ofSeconds(propertiesReader.getIntPropertyValue("option.thread_sleep")).toMillis());
         Assertions.assertThat(otdsUsername).isNotNull();
         test.info("Logout done");
     }
@@ -106,8 +114,8 @@ class BasicPlatformTests {
     private static void login(ExtentTest test) {
         test.info("Do login");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAIT_SECONDS));
-        driver.findElement(By.id("otds_username")).sendKeys(propertiesReader.getPropertyValue("otds.username"));
-        driver.findElement(By.id("otds_password")).sendKeys(propertiesReader.getPropertyValue("otds.password"));
+        driver.findElement(By.id("otds_username")).sendKeys(propertiesReader.getStringPropertyValue("otds.username"));
+        driver.findElement(By.id("otds_password")).sendKeys(propertiesReader.getStringPropertyValue("otds.password"));
         WebElement loginButton = driver.findElement(By.id("loginbutton"));
         Assertions.assertThat(loginButton.isEnabled()).isTrue();
         loginButton.click();
