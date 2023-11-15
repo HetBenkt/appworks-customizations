@@ -29,12 +29,11 @@ class BasicPlatformTests {
     @BeforeEach
     void initDriver() {
         driver = new ChromeDriver(); //Because we close it after the test!
+        driver.get(propertiesReader.getPropertyValue("otds.login_url"));
     }
 
     @Test
     void browserOpen() throws InterruptedException {
-        driver.get(propertiesReader.getPropertyValue("otds.login_url"));
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_SECONDS));
         WebElement otdsUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("otds_username")));
 
@@ -43,24 +42,21 @@ class BasicPlatformTests {
     }
 
     @Test
-    void createNewInstance() throws InterruptedException {
-        driver.get(propertiesReader.getPropertyValue("otds.login_url"));
+    void createAndCancelInstance() throws InterruptedException {
         login();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_SECONDS));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[aria-label='Create a new item']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(propertiesReader.getPropertyValue("solution.creatable_option")))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Cancel']"))).click();
-        //TODO this goes too fast!
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAIT_SECONDS));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ai-dialog.au-target.awlc-save-boundary.dialog-CreateItem")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[aria-label='Cancel']"))).click(); //By.xpath("//button[text()='Cancel']")
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[aria-label='Menu']")));
 
         logout();
     }
 
     @Test
     void loginLogout() throws InterruptedException {
-        driver.get(propertiesReader.getPropertyValue("otds.login_url"));
         login();
         logout();
     }
