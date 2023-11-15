@@ -46,19 +46,21 @@ class BasicPlatformTests {
     }
 
     @Test
-    void browserOpen() throws InterruptedException {
+    void browserOpen() {
         ExtentTest test = extent.createTest("browserOpen()", "A simple test to open the browser");
         test.info("Start waiting for login screen");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_SECONDS));
-        WebElement otdsUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("otds_username")));
-        test.info("Login screen found");
-
-        Thread.sleep(Duration.ofSeconds(THREAD_SLEEP_SECONDS).toMillis());
+        WebElement otdsUsername = null;
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_SECONDS));
+            otdsUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("otds_username")));
+            test.info("Login screen found");
+            Thread.sleep(Duration.ofSeconds(THREAD_SLEEP_SECONDS).toMillis());
+            test.pass("Test is passed!");
+        } catch (Exception e) {
+            test.fail("Login screen not found!");
+        }
         Assertions.assertThat(otdsUsername).isNotNull();
-
-        test.pass("Test is passed!");
-        extent.flush();
     }
 
     @Test
@@ -79,7 +81,6 @@ class BasicPlatformTests {
         logout(test);
 
         test.pass("Test is passed!");
-        extent.flush();
     }
 
     @Test
@@ -88,7 +89,6 @@ class BasicPlatformTests {
         login(test);
         logout(test);
         test.pass("Test is passed!");
-        extent.flush();
     }
 
     private static void logout(ExtentTest test) throws InterruptedException {
@@ -117,6 +117,7 @@ class BasicPlatformTests {
     @AfterEach
     void closeDriver() {
         driver.close();
+        extent.flush();
     }
 
     @AfterAll
