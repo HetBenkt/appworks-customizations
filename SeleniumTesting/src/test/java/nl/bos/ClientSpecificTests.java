@@ -30,6 +30,14 @@ class ClientSpecificTests extends WebDriverSetup {
         //TODO Make this flexible (by input file?) to fill in a 'Create' form (with optional/required data and different data types)!
         WebElement inputField1 = getDriver().findElement(By.xpath("//div[contains(@style, 'flex-direction: row')]/div[label[contains(text(), '{label_name}')]]/following-sibling::input".replace("{label_name}", getPropertiesReader().getStringPropertyValue("solution.create.field1"))));
         inputField1.sendKeys(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        WebElement inputField2 = getDriver().findElement(By.xpath("//div[contains(@style, 'flex-direction: row')]/div[label[contains(text(), '{label_name}')]]/following-sibling::input".replace("{label_name}", getPropertiesReader().getStringPropertyValue("solution.create.field2"))));
+        inputField2.sendKeys("john@doe.io");
+        WebElement inputField3 = getDriver().findElement(By.xpath("//div[contains(@style, 'flex-direction: row')]/div[label[contains(text(), '{label_name}')]]/following-sibling::input".replace("{label_name}", getPropertiesReader().getStringPropertyValue("solution.create.field3"))));
+        inputField3.sendKeys("John Doe");
+        getDriver().findElement(By.xpath("//adjustable-container//label[@title='{label_name}']/ancestor::div[contains(@class, 'adjustable-container')][1]//bs-image-button[.//img[@alt='Browse']]/button".replace("{label_name}", getPropertiesReader().getStringPropertyValue("solution.create.field4")))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ai-dialog-header/div/h5[text()='{label_name}']".replace("{label_name}", getPropertiesReader().getStringPropertyValue("solution.create.field5")))));
+
+        Thread.sleep(Duration.ofSeconds(getPropertiesReader().getIntPropertyValue("option.thread_sleep")).toMillis());
 
         //No need to check if the action should be "Create and open" | "Create" | "Save and create another"
         //By.xpath("//button[text()='Create and open']")
