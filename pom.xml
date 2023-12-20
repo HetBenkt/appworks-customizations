@@ -153,6 +153,19 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/components/wsappserver/wsappserver.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>entityCore</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/tomee/webapps/home#app#entityRestService/WEB-INF/lib/entityCore.jar</systemPath>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.0.0-jre</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
