@@ -16,6 +16,14 @@ class TestStreamUtils {
     private final static String ACTUAL = "<History><CD e=\"080027f7a5dca1eea7e061c773fcb579\" i=\"080027f7a5dca1eea7e061c773fcb579.1\" t=\"project-1\" v=\"ca15687458733325a316150d5a63e1ed\" x=\"080027f7a5dca1eea7e061c773fcb579.1.\"/></History>";
 
     @Test
+    void doNoneTest() {
+        byte[] compress = StreamUtils.compress(ACTUAL, getStreamCompressionFactory(HistoryLog.CompressionType.None));
+        byte[] decompress = StreamUtils.decompress(compress, getStreamDecompressionFactory(HistoryLog.CompressionType.None));
+        String expected = new String(decompress, StandardCharsets.UTF_8);
+        Assertions.assertThat(ACTUAL).isEqualTo(expected);
+    }
+
+    @Test
     void doDeflateTest() {
         byte[] compress = StreamUtils.compress(ACTUAL, getStreamCompressionFactory(HistoryLog.CompressionType.Deflate));
         byte[] decompress = StreamUtils.decompress(compress, getStreamDecompressionFactory(HistoryLog.CompressionType.Deflate));
