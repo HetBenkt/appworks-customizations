@@ -27,7 +27,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <cordys.version>24.1</cordys.version>
-        <cordys.home>C:/_HDD_SYNCH/CORDYS/CORDYS_23_4</cordys.home>
+        <cordys.home>C:/_HDD_SYNCH/CORDYS/CORDYS_24_1</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
