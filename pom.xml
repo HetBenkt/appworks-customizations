@@ -188,6 +188,13 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/components/webgateway/webgateway.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>restgateway</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/../RESTGateway.jar</systemPath>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.xml.soap/jakarta.xml.soap-api -->
         <dependency>
             <groupId>jakarta.xml.soap</groupId>
