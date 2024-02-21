@@ -20,6 +20,7 @@
         <module>XQY_API</module>
         <module>InterestingClasses</module>
         <module>SeleniumTesting</module>
+        <module>Utils</module>
         <!--<module>Legacy</module>-->
     </modules>
 
