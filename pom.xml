@@ -114,14 +114,7 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
-            <artifactId>ruleengine</artifactId>
-            <version>${cordys.version}</version>
-            <scope>system</scope>
-            <systemPath>${cordys.home}/components/ruleengine/ruleengine.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.opentext</groupId>
-            <artifactId>entityruntime</artifactId>
+            <artifactId>documentstore</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/documentstore/documentstore.jar</systemPath>
@@ -154,13 +147,13 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/components/wsappserver/wsappserver.jar</systemPath>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.opentext</groupId>-->
-<!--            <artifactId>entityCore</artifactId>-->
-<!--            <version>${cordys.version}</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${cordys.home}/tomee/webapps/home#app#entityRestService/WEB-INF/lib/entityCore.jar</systemPath>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>entityCore</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/tomee/webapps/home#app#entityRestService/WEB-INF/lib/entityCore.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
             <artifactId>entityruntime</artifactId>
