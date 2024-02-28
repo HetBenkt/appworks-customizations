@@ -2,6 +2,7 @@ package nl.bos.appworks.utilities;
 
 import com.eibus.xml.nom.Document;
 import com.eibus.xml.nom.XMLException;
+import com.eibus.xml.xpath.NodeSet;
 import com.eibus.xml.xpath.XPath;
 import com.eibus.xml.xpath.XPathResult;
 import org.assertj.core.api.Assertions;
@@ -22,7 +23,16 @@ class UtilitiesTest {
             """;
 
     @Test
-    void testMatches() {
+    void testGetHelloString() {
+        Assertions.assertThat(Utilities.getHelloString("World")).isEqualTo("Hello World");
+
+        XPath xpath = XPath.getXPathInstance("nl.bos.appworks.utilities.Utilities.getHelloString(\"World\")");
+        XPathResult result = xpath.evaluate(null);
+        Assertions.assertThat(result.getStringResult()).isEqualTo("Hello World");
+    }
+
+    @Test
+    void testMatchesString() {
         Assertions.assertThat(Utilities.matches("a*b", "aaaaab")).isTrue();
         Assertions.assertThat(Utilities.matches(".", ACTUAL)).isFalse();
         Assertions.assertThat(Utilities.matches("", ACTUAL)).isFalse();
@@ -36,29 +46,27 @@ class UtilitiesTest {
         Assertions.assertThat(Utilities.matches(".*P\\dM.*", ACTUAL)).isTrue();
         Assertions.assertThat(Utilities.matches(".*2024(-02)?-17Z.*", ACTUAL)).isTrue();
         Assertions.assertThat(Utilities.matches(".*2024-(\\d{2}-)?17Z.*", ACTUAL)).isTrue();
-    }
 
-    @Test
-    void testPathGetHelloString() {
-        XPath xpath = XPath.getXPathInstance("nl.bos.appworks.utilities.Utilities.getHelloString(\"World\")");
-        XPathResult result = xpath.evaluate(null);
-        Assertions.assertThat(result.getStringResult()).isEqualTo("Hello World");
-    }
-
-    @Test
-    void testPathMatches() {
         XPath xpath = XPath.getXPathInstance("nl.bos.appworks.utilities.Utilities.matches(\"a*b\", \"aaaaab\")");
         XPathResult result = xpath.evaluate(null);
         Assertions.assertThat(result.getBooleanResult()).isTrue();
     }
 
     @Test
-    void testPathMatchesXml() throws XMLException {
-        Document document = new Document();
-        int xmlInput = document.load(XML_INPUT.getBytes());
+    void testMatchesXml() throws XMLException {
+        int xmlInput = new Document().load(XML_INPUT.getBytes());
+        Assertions.assertThat(Utilities.matches(".*Reminder.*", xmlInput)).isTrue();
 
-        XPath xpath = XPath.getXPathInstance("nl.bos.appworks.utilities.Utilities.matchesXml(\".*Jani.*\", "+xmlInput+")");
+        XPath xpath = XPath.getXPathInstance("nl.bos.appworks.utilities.Utilities.matches(\".*Jani.*\", "+xmlInput+")");
         XPathResult result = xpath.evaluate(null);
         Assertions.assertThat(result.getBooleanResult()).isTrue();
+    }
+
+    @Test
+    void testMatchesNodeSet() throws XMLException {
+        int xmlInput = new Document().load(XML_INPUT.getBytes());
+        XPath expression = XPath.getXPathInstance("//note/node()");
+        NodeSet nodeSet = expression.selectNodeSet(xmlInput);
+        Assertions.assertThat(Utilities.matches(".*Reminder.*", nodeSet)).isTrue();
     }
 }
