@@ -191,6 +191,13 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>cws</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/cws/cws.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>license</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
@@ -205,10 +212,38 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>ldapconn</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/ldapconn/ldapconn.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>restgateway</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/../RESTGateway.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>contractcenter_import</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/ContractCenterImport.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>contractcenter</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/ContractCenter.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>contractcenter_bcwsapp</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/BCWSApp.jar</systemPath>
         </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.xml.soap/jakarta.xml.soap-api -->
         <dependency>
@@ -246,6 +281,18 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.16</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
