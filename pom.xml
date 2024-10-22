@@ -58,6 +58,13 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>uddiconn</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/uddiconn/uddiconn.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>eibxml</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
