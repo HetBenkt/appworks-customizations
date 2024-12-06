@@ -128,10 +128,80 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>otds-client</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/ext/otds-client.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>otds-basics</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/ext/otds-basics.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otdsws</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otdsws-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otds-pl-api</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otds-pl-api-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otds-as-as</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otds-as-as-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otds-usergroup-operations</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otds-usergroup-operations-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otds-ds-repository</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otds-ds-repository-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otds-ds-common</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otds-ds-common-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext.otds</groupId>
+            <artifactId>otds-auth</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/otds/otdsws/otds-auth-24.3.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>dbconnection</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/dbconnection/dbconnection.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>webgateway</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/webgateway/webgateway.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
