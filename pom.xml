@@ -21,14 +21,16 @@
         <module>InterestingClasses</module>
         <module>SeleniumTesting</module>
         <module>Utils</module>
+        <module>AppConnectorLocalAI</module>
         <!--<module>Legacy</module>-->
     </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <cordys.version>24.4</cordys.version>
-        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_24_4</cordys.home>
+        <cordys.version>25.1</cordys.version>
+        <otds.version>24.4.0</otds.version>
+        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_1</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -69,6 +71,13 @@
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/eibxml/eibxml.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>aiclient</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/aiclient/aiclient.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
@@ -145,49 +154,49 @@
             <artifactId>otdsws</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otdsws-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otdsws-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext.otds</groupId>
             <artifactId>otds-pl-api</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otds-pl-api-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otds-pl-api-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext.otds</groupId>
             <artifactId>otds-as-as</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otds-as-as-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otds-as-as-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext.otds</groupId>
             <artifactId>otds-usergroup-operations</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otds-usergroup-operations-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otds-usergroup-operations-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext.otds</groupId>
             <artifactId>otds-ds-repository</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otds-ds-repository-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otds-ds-repository-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext.otds</groupId>
             <artifactId>otds-ds-common</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otds-ds-common-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otds-ds-common-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext.otds</groupId>
             <artifactId>otds-auth</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/otds/otdsws/otds-auth-24.3.0.jar</systemPath>
+            <systemPath>${cordys.home}/otds/otdsws/otds-auth-${otds.version}.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
@@ -233,6 +242,13 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>emailconn</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/emailconn/emailconn.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>notification</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
@@ -257,7 +273,7 @@
             <artifactId>jakartaee-api</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/tomee/lib/jakartaee-api-9.1.1-tomcat.jar</systemPath>
+            <systemPath>${cordys.home}/tomee/lib/jakartaee-api-10.0-tomcat.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
@@ -300,6 +316,13 @@
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/ldapconn/ldapconn.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>httpconnector</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/httpconnector/httpconnector.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
