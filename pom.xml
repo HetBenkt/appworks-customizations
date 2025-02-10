@@ -327,6 +327,13 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>sso</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/sso/sso.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>restgateway</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
