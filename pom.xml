@@ -29,9 +29,9 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <cordys.version>25.1</cordys.version>
+        <cordys.version>25.2</cordys.version>
         <otds.version>24.4.0</otds.version>
-        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_1</cordys.home>
+        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_2</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -339,27 +339,27 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/../RESTGateway.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>com.opentext</groupId>
-            <artifactId>contractcenter_import</artifactId>
-            <version>${cordys.version}</version>
-            <scope>system</scope>
-            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/ContractCenterImport.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.opentext</groupId>
-            <artifactId>contractcenter</artifactId>
-            <version>${cordys.version}</version>
-            <scope>system</scope>
-            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/ContractCenter.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.opentext</groupId>
-            <artifactId>contractcenter_bcwsapp</artifactId>
-            <version>${cordys.version}</version>
-            <scope>system</scope>
-            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/BCWSApp.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.opentext</groupId>-->
+<!--            <artifactId>contractcenter_import</artifactId>-->
+<!--            <version>${cordys.version}</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/ContractCenterImport.jar</systemPath>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.opentext</groupId>-->
+<!--            <artifactId>contractcenter</artifactId>-->
+<!--            <version>${cordys.version}</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/ContractCenter.jar</systemPath>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.opentext</groupId>-->
+<!--            <artifactId>contractcenter_bcwsapp</artifactId>-->
+<!--            <version>${cordys.version}</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${cordys.home}/../CONTRACT_CENTER_24_2/Java/Java Archives/BCWSApp.jar</systemPath>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/jakarta.xml.soap/jakarta.xml.soap-api -->
         <dependency>
             <groupId>jakarta.xml.soap</groupId>
