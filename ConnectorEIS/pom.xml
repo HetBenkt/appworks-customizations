@@ -17,14 +17,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.opentext</groupId>
-            <artifactId>entityruntime</artifactId>
-            <version>${cordys.version}</version>
-            <scope>system</scope>
-            <systemPath>${cordys.home}/crosscontext/entityruntime-bean-interface.jar</systemPath>
-        </dependency>
-    </dependencies>
-
 </project>
