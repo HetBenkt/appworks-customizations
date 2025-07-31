@@ -29,9 +29,9 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <cordys.version>25.2</cordys.version>
+        <cordys.version>25.3</cordys.version>
         <otds.version>24.4.0</otds.version>
-        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_2</cordys.home>
+        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_3</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -243,6 +243,20 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>entityruntime-bean-interface</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/crosscontext/entityruntime-bean-interface.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>mail</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/ext/mail.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>notification</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
@@ -289,6 +303,13 @@
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/cws/cws.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
+            <artifactId>cws.gitadaper</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/cws/lib/cordys.cws.gitadapter.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
