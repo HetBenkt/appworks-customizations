@@ -29,9 +29,9 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <cordys.version>25.3</cordys.version>
-        <otds.version>24.4.0</otds.version>
-        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_3</cordys.home>
+        <cordys.version>25.4</cordys.version>
+        <otds.version>25.3.0</otds.version>
+        <cordys.home>C:\_HDD_SYNCH\CORDYS\CORDYS_25_4</cordys.home>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -61,6 +61,13 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>anttasks</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/anttasks/anttasks.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>uddiconn</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
@@ -73,6 +80,7 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/components/eibxml/eibxml.jar</systemPath>
         </dependency>
+        <!--
         <dependency>
             <groupId>com.opentext</groupId>
             <artifactId>aiclient</artifactId>
@@ -80,6 +88,7 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/components/aiclient/aiclient.jar</systemPath>
         </dependency>
+        -->
         <dependency>
             <groupId>com.opentext</groupId>
             <artifactId>basicutil</artifactId>
@@ -281,7 +290,7 @@
             <artifactId>jakartaee-api</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/tomee/lib/jakartaee-api-10.0-tomcat.jar</systemPath>
+            <systemPath>${cordys.home}/tomee/lib/jakartaee-api-10.0.1-tomcat.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
@@ -385,21 +394,21 @@
             <artifactId>jackson-core</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/tomee/lib/jackson-core-2.18.2.jar</systemPath>
+            <systemPath>${cordys.home}/tomee/lib/jackson-core-2.20.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/tomee/lib/jackson-databind-2.18.2.jar</systemPath>
+            <systemPath>${cordys.home}/tomee/lib/jackson-databind-2.20.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
-            <systemPath>${cordys.home}/tomee/lib/jackson-annotations-2.18.2.jar</systemPath>
+            <systemPath>${cordys.home}/tomee/lib/jackson-annotations-2.20.jar</systemPath>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
