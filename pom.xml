@@ -75,12 +75,18 @@
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
+            <artifactId>jmsconnector</artifactId>
+            <version>${cordys.version}</version>
+            <scope>system</scope>
+            <systemPath>${cordys.home}/components/jmsconnector/jmsconnector.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.opentext</groupId>
             <artifactId>eibxml</artifactId>
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/components/eibxml/eibxml.jar</systemPath>
         </dependency>
-        <!--
         <dependency>
             <groupId>com.opentext</groupId>
             <artifactId>aiclient</artifactId>
@@ -88,7 +94,6 @@
             <scope>system</scope>
             <systemPath>${cordys.home}/components/aiclient/aiclient.jar</systemPath>
         </dependency>
-        -->
         <dependency>
             <groupId>com.opentext</groupId>
             <artifactId>basicutil</artifactId>
@@ -291,6 +296,12 @@
             <version>${cordys.version}</version>
             <scope>system</scope>
             <systemPath>${cordys.home}/tomee/lib/jakartaee-api-10.0.1-tomcat.jar</systemPath>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.rabbitmq.jms/rabbitmq-jms -->
+        <dependency>
+            <groupId>com.rabbitmq.jms</groupId>
+            <artifactId>rabbitmq-jms</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>com.opentext</groupId>
