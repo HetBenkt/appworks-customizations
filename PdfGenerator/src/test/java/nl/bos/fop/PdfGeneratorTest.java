@@ -1,4 +1,4 @@
-package nl.bos;
+package nl.bos.fop;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,7 @@
-package nl.bos;
+package nl.bos.fop;
 
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
-import org.apache.fop.apps.MimeConstants;
 import org.xml.sax.SAXException;
 
 import javax.xml.transform.*;
